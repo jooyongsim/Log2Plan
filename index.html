@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Log2Plan: An Adaptive GUI Automation Framework Integrated with Task Mining Approach</title>
+  <meta property="og:title" content="Log2Plan: An Adaptive GUI Automation Framework Integrated with Task Mining Approach" />
+  <meta property="og:description" content="GUI task automation streamlines repetitive tasks, but existing LLM or VLM-based planner-executor agents suffer from brittle generalization, high latency, and limited long-horizon c" />
+  <meta property="og:type" content="website" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="kicker">UIST '25 Oral</div>
+      <h1 class="title">Log2Plan: An Adaptive GUI Automation Framework Integrated with Task Mining Approach</h1>
+      <div class="authors">Seoyoung Lee, Seobin Yoon, Seongbeen Lee, Hyesoo Kim, <a href="https://sim-research.org" target="_blank" rel="noopener">Joo Yong Sim</a></div>
+      <div class="affil">Sookmyung Women's University · Seoul, Republic of Korea</div>
+      <div class="badges">
+        
+  <a class="badge" href="https://arxiv.org/abs/2509.22137" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 17l9 4 9-4"/><path d="M3 12l9 4 9-4"/></svg><span>arXiv</span></a>
+  <a class="badge" href="https://dl.acm.org/doi/10.1145/3746059.3747663" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10v10H7z"/></svg><span>ACM UIST (DL)</span></a>
+  <a class="badge" href="https://github.com/jooyongsim/Log2Plan" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-6 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>GitHub</span></a>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="card">
+        <h2 class="section-title">Abstract</h2>
+        <p class="abstract">GUI task automation streamlines repetitive tasks, but existing LLM or VLM-based planner-executor agents suffer from brittle generalization, high latency, and limited long-horizon coherence. Their reliance on single-shot reasoning or static plans makes them fragile under UI changes or complex tasks. Log2Plan addresses these limitations by combining a structured two-level planning framework with a task mining approach over user behavior logs, enabling robust and adaptable GUI automation. Log2Plan constructs high-level plans by mapping user commands to a structured task dictionary, enabling consistent and generalizable automation. To support personalization and reuse, it employs a task mining approach from user behavior logs that identifies user-specific patterns. These high-level plans are then grounded into low-level action sequences by interpreting real-time GUI context, ensuring robust execution across varying interfaces. We evaluated Log2Plan on 200 real-world tasks, demonstrating significant improvements in task success rate and execution time. Notably, it maintains over 60.0\% success rate even on long-horizon task sequences, highlighting its robustness in complex, multi-step workflows.</p>
+      </section>
+    </div>
+
+    
+<div class="card" style="margin-top:20px">
+  <h2 class="section-title">Project Video</h2>
+  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px">
+    <iframe src="https://www.youtube.com/embed/mQ-8rR5NPSA" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+  </div>
+</div>
+
+
+    
+<section id="figures" class="card" style="margin-top:20px">
+  <h2 class="section-title">System Overview</h2>
+  <div class="gallery one-col">
+    
+    <figure class="figure figure-large">
+      <p class="figure-desc">Log2Plan turns raw GUI interaction logs into reusable task abstractions and skills, then synthesizes high-level plans to automate multi-step computer tasks. A task-mining stage segments and clusters logs, a planner composes learned skills with global/local search, and an online adaptor refines execution from feedback in real time. The result is robust, transferable automation that generalizes across apps and domains, outperforming brittle macros or single-demo approaches on realistic workflows.</p>
+<img src="assets/figures/overview.JPG" alt="Overview of the proposed method : The Agent identify and label Tasks from collected log data. The user command is decomposed into a sequence of event-level tasks. Then, the LocalPlanner generates a task block-level plan, which corresponds to the event, optimized for the current GUI environment. Subsequently, the Execution phase carries out the low-level control." loading="lazy">
+      
+      <p class="figure-caption"><strong>Overview of the proposed method : The Agent identify and label Tasks from collected log data. The user command is decomposed into a sequence of event-level tasks. Then, the LocalPlanner generates a task block-level plan, which corresponds to the event, optimized for the current GUI environment. Subsequently, the Execution phase carries out the low-level control.</strong></p>
+      
+    </figure>
+    
+    <figure class="figure figure-large">
+      <img src="assets/figures/domainCompare.jpg" alt="Domain distributions of user logs (left) and testcases (right). Inner rings indicate the proportion of source types: Web, Local, App, and Crossover; outer rings show domain-level breakdowns. Domains shared across both sets are shown in gray." loading="lazy">
+      
+      <p class="figure-caption"><strong>Domain distributions of user logs (left) and testcases (right). Inner rings indicate the proportion of source types: Web, Local, App, and Crossover; outer rings show domain-level breakdowns. Domains shared across both sets are shown in gray.</strong></p>
+      
+    </figure>
+    
+    <figure class="figure figure-large">
+      <img src="assets/figures/withlogExample.jpg" alt="Log2Plan's Three-Principle Approach to Complex Task Automation. The system retrieves and combines patterns from multiple logged sessions using frequency-based extraction (red), similarity-based adaptation (green), and context-aware logical reasoning (blue) to execute a sophisticated multi-application workflow. The central combination box shows how these principles enable novel task synthesis that exceeds any individual logged interaction." loading="lazy">
+      
+      <p class="figure-caption"><strong>Log2Plan's Three-Principle Approach to Complex Task Automation. The system retrieves and combines patterns from multiple logged sessions using frequency-based extraction (red), similarity-based adaptation (green), and context-aware logical reasoning (blue) to execute a sophisticated multi-application workflow. The central combination box shows how these principles enable novel task synthesis that exceeds any individual logged interaction.</strong></p>
+      
+    </figure>
+  </div>
+</section>
+
+
+    
+<section class="card" style="margin-top:20px">
+  <h2 class="section-title">Citation</h2>
+  <p class="citation-text">Seoyoung Lee, Seobin Yoon, Seongbeen Lee, Hyesoo Kim, <a href="https://sim-research.org" target="_blank" rel="noopener">Joo Yong Sim</a>.
+    <em>Log2Plan: An Adaptive GUI Automation Framework Integrated with Task Mining Approach</em>. In <em>UIST '25: Proceedings of the ACM Symposium on User Interface Software and Technology</em>, 2025.
+    ACM. DOI: <a href="https://doi.org/10.1145/3746059.3747663" target="_blank" rel="noopener">10.1145/3746059.3747663</a>.</p>
+  
+<ul class="quick-links">
+  <li><a href="https://arxiv.org/abs/2509.22137" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 17l9 4 9-4"/><path d="M3 12l9 4 9-4"/></svg><span>arXiv</span></a></li>
+  <li><a href="https://github.com/jooyongsim/Log2Plan" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-6 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>GitHub</span></a></li>
+  <li><a href="https://dl.acm.org/doi/10.1145/3746059.3747663" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10v10H7z"/></svg><span>ACM UIST (DL)</span></a></li>
+</ul>
+
+  <div class="codeblock">
+    <div class="codeblock-header">
+      <span>BibTeX</span>
+      <button class="copy-btn" data-target="bibtex1">Copy</button>
+    </div>
+    <pre id="bibtex1"><code>@inproceedings{Log2Plan2025,
+  author    = {Seoyoung Lee and Seobin Yoon and Seongbeen Lee and Hyesoo Kim and Joo Yong Sim},
+  title     = {Log2Plan: An Adaptive GUI Automation Framework Integrated with Task Mining Approach},
+  booktitle = {Proceedings of the ACM Symposium on User Interface Software and Technology (UIST '25)},
+  year      = {2025},
+  publisher = {Association for Computing Machinery},
+  doi       = {10.1145/3746059.3747663},
+  url       = {https://dl.acm.org/doi/10.1145/3746059.3747663},
+  eprint    = {https://arxiv.org/abs/2509.22137}
+}</code></pre>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 · Seoyoung Lee, Seobin Yoon, Seongbeen Lee, Hyesoo Kim, Joo Yong Sim
+    </div>
+  </footer>
+
+<script>
+document.addEventListener('click', function(e){
+  const btn = e.target.closest('.copy-btn');
+  if(!btn) return;
+  const id = btn.getAttribute('data-target');
+  const pre = document.getElementById(id);
+  if(!pre) return;
+  const text = pre.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = 'Copied';
+    setTimeout(()=>{ btn.textContent = 'Copy'; }, 1200);
+  });
+});
+</script>
+</body>
+</html>
